@@ -1,16 +1,23 @@
 {
   "name": "whatstack",
   "version": "1.0.0",
-  "description": "Ultimate Chrome Extension website technology and metadata analyzer.",
+  "description": "WhatStack — ultimate all-in-one website technology & metadata analyzer. Chrome Extension (Manifest V3) + optional Express companion API.",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "dev:ext": "node scripts/build-extension.mjs --watch",
+    "build": "npm run typecheck && vite build && node scripts/build-extension.mjs",
+    "build:web": "vite build",
+    "typecheck": "tsc --noEmit",
+    "icons": "node scripts/generate-icons.mjs",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server:install": "npm --prefix server install",
+    "server:dev": "npm --prefix server run dev",
+    "server:start": "npm --prefix server run start"
   },
   "dependencies": {
-    "lucide-react": "^0.450.0",
+    "lucide-react": "^0.577.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -18,8 +25,14 @@
     "@types/chrome": "^0.0.270",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@typescript-eslint/parser": "^7.13.1",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
+    "esbuild": "^0.28.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.2.2",
